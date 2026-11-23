@@ -1214,6 +1214,7 @@ kbd {
   background: linear-gradient(135deg, #ff0055, #ff5500) !important;
   color: #fff !important;
   box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+  font-weight: 800;
 }
 
 .badge-kof {
@@ -1332,7 +1333,7 @@ kbd {
         </div>
         <div class="header-status">
           <span class="status-pill status-ready" id="engine-status-pill" title="雙架構模擬核心就緒">
-            <i class="fa-solid fa-microchip"></i> WASM Snes9x + FBNeo
+            <i class="fa-solid fa-bolt" style="color:#ffcc00;"></i> 拳皇街機即點即玩
           </span>
           <span class="status-pill status-gamepad" id="gamepad-status" title="實體手把連線狀態">
             <i class="fa-solid fa-gamepad"></i> <span id="gamepad-text">手把已待命</span>
@@ -1372,17 +1373,17 @@ kbd {
         <div class="hero-gradient"></div>
         <div class="hero-content">
           <div class="hero-badges">
-            <span class="badge-tag badge-arcade"><i class="fa-solid fa-fire"></i> 街機神作 · 拳皇巔峰</span>
+            <span class="badge-tag badge-arcade"><i class="fa-solid fa-fire"></i> 街機神作 · 點擊直玩</span>
             <span class="badge-tag badge-gold" id="hero-lang">Neo-Geo 原版滿血</span>
             <span class="badge-tag" id="hero-genre">格鬥遊戲天花板</span>
           </div>
           <h1 class="hero-title" id="hero-title">拳皇 '97 (The King of Fighters '97)</h1>
           <p class="hero-desc" id="hero-desc">
-            格鬥遊戲歷史上的絕對神作！草薙京與八神庵的宿命對決、大蛇三神器篇終章。手感爽快、連段極致、出招順暢，是無數玩家童年街機廳不可磨滅的共同回憶。
+            格鬥遊戲歷史上的絕對神作！草薙京與八神庵的宿命對決、大蛇三神器篇終章。免自備 ROM，點擊即可秒開狂飆對打！
           </p>
           <div class="hero-actions">
             <button class="play-btn hero-play-btn" id="hero-play-action">
-              <i class="fa-solid fa-play"></i> 立即啟動格鬥
+              <i class="fa-solid fa-play"></i> 立即啟動格鬥 (免下載)
             </button>
             <button class="details-btn" id="hero-details-action">
               <i class="fa-solid fa-book-skull"></i> 查看出招表與詳情
@@ -1396,7 +1397,7 @@ kbd {
           <i class="fa-solid fa-layer-group"></i> 全部遊戲 (<span id="count-all">17</span>)
         </button>
         <button class="filter-tab" data-category="kof">
-          <i class="fa-solid fa-fire" style="color:#ff3b30;"></i> 🥊 拳皇街機專區
+          <i class="fa-solid fa-fire" style="color:#ff3b30;"></i> 🥊 拳皇街機 (免自備即玩)
         </button>
         <button class="filter-tab" data-category="homebrew">
           <i class="fa-solid fa-bolt" style="color:#ffcc00;"></i> ⚡ 免下載即玩
@@ -1421,7 +1422,7 @@ kbd {
             <i class="fa-solid fa-gamepad"></i>
             <span id="gallery-title">超任與拳皇街機經典庫</span>
           </h2>
-          <span class="section-subtitle">點擊封面立即開玩 · 支援實體手把 · 內建拳皇出招表 · 支援拖曳自備 ROM</span>
+          <span class="section-subtitle">拳皇 '97 / '98 / 2002 點擊秒開直玩 · 內建出招表 · 支援實體手把與鍵盤</span>
         </div>
 
         <div class="games-grid" id="games-grid"></div>
@@ -1455,7 +1456,7 @@ kbd {
           </button>
           <div class="player-game-info">
             <span class="player-game-title" id="current-game-title">遊戲載入中...</span>
-            <span class="arcade-coin-hint" id="arcade-coin-pill" style="display:none;"><i class="fa-solid fa-coins"></i> Shift 投幣 / Enter 開始</span>
+            <span class="arcade-coin-hint" id="arcade-coin-pill" style="display:none;"><i class="fa-solid fa-coins"></i> 街機：點畫面一下即可開始 (Shift 投幣 / Enter 開始)</span>
             <span class="player-fps" id="player-fps-pill">60 FPS</span>
           </div>
         </div>
@@ -1532,15 +1533,15 @@ kbd {
               <span><i class="fa-regular fa-calendar"></i> <span id="modal-year">1997</span></span>
               <span><i class="fa-solid fa-users"></i> <span id="modal-players">2 人</span></span>
               <span><i class="fa-solid fa-globe"></i> <span id="modal-region">Neo-Geo</span></span>
-              <span><i class="fa-solid fa-floppy-disk"></i> <span id="modal-size">28.5 MB</span></span>
+              <span><i class="fa-solid fa-bolt"></i> <span id="modal-size">一鍵直玩</span></span>
             </div>
             <p id="modal-desc" class="modal-desc">遊戲描述內容...</p>
             <div class="modal-actions">
               <button class="play-btn modal-play-btn" id="modal-play-btn">
-                <i class="fa-solid fa-play"></i> 立即遊玩
+                <i class="fa-solid fa-play"></i> 立即開玩 (免下載)
               </button>
               <button class="btn-subtle" id="modal-download-rom">
-                <i class="fa-solid fa-download"></i> 下載 ROM
+                <i class="fa-solid fa-gamepad"></i> 載入自備 ROM
               </button>
             </div>
           </div>
@@ -1586,11 +1587,11 @@ kbd {
             <table class="key-table">
               <tr><th>街機動作</th><th>鍵盤鍵位</th><th>手把鍵位</th></tr>
               <tr><td>方向走位/起跳</td><td><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></td><td>十字鍵 / 搖桿</td></tr>
-              <tr><td>A (輕拳)</td><td><kbd>A</kbd></td><td><kbd>X</kbd> (西鍵)</td></tr>
-              <tr><td>B (輕腳)</td><td><kbd>Z</kbd></td><td><kbd>A</kbd> (南鍵)</td></tr>
-              <tr><td>C (重拳)</td><td><kbd>S</kbd></td><td><kbd>Y</kbd> (北鍵)</td></tr>
-              <tr><td>D (重腳)</td><td><kbd>X</kbd></td><td><kbd>B</kbd> (東鍵)</td></tr>
-              <tr><td>投幣 (Coin)</td><td><kbd>Shift</kbd></td><td><kbd>Select / Back</kbd></td></tr>
+              <tr><td>A (輕拳)</td><td><kbd>A</kbd> 或 <kbd>J</kbd></td><td><kbd>X</kbd> (西鍵)</td></tr>
+              <tr><td>B (輕腳)</td><td><kbd>Z</kbd> 或 <kbd>K</kbd></td><td><kbd>A</kbd> (南鍵)</td></tr>
+              <tr><td>C (重拳)</td><td><kbd>S</kbd> 或 <kbd>U</kbd></td><td><kbd>Y</kbd> (北鍵)</td></tr>
+              <tr><td>D (重腳)</td><td><kbd>X</kbd> 或 <kbd>I</kbd></td><td><kbd>B</kbd> (東鍵)</td></tr>
+              <tr><td>投幣 (Coin)</td><td><kbd>Shift</kbd> 或 <kbd>空格</kbd></td><td><kbd>Select / Back</kbd></td></tr>
               <tr><td>開始 (Start)</td><td><kbd>Enter</kbd></td><td><kbd>Start</kbd></td></tr>
               <tr><td>一鍵爆氣 (ABC)</td><td><kbd>Q</kbd></td><td><kbd>L 肩鍵</kbd></td></tr>
               <tr><td>緊急閃避 (AB)</td><td><kbd>W</kbd></td><td><kbd>R 肩鍵</kbd></td></tr>
@@ -1643,12 +1644,13 @@ kbd {
     ],
     "players": 2,
     "featured": true,
-    "preloaded": false,
+    "preloaded": true,
+    "embedUrl": "https://www.retrogames.cc/embed/10359-the-king-of-fighters-97-ngm-2320.html",
     "cover": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20300%20400%22%20width%3D%22300%22%20height%3D%22400%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg_kof97%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23d00000%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23370617%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22sfc_banner_kof97%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ff0055%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23ffcc00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2266%25%22%20stop-color%3D%22%2300f5d4%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23ff3b30%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22300%22%20height%3D%22400%22%20rx%3D%2216%22%20fill%3D%22url%28%23bg_kof97%29%22/%3E%0A%20%20%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22300%22%20height%3D%228%22%20rx%3D%224%22%20fill%3D%22url%28%23sfc_banner_kof97%29%22/%3E%0A%20%20%3Crect%20x%3D%220%22%20y%3D%2224%22%20width%3D%22300%22%20height%3D%2236%22%20fill%3D%22rgba%280%2C0%2C0%2C0.5%29%22/%3E%0A%20%20%3Ctext%20x%3D%2216%22%20y%3D%2247%22%20fill%3D%22%23f0f4f8%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2213%22%20letter-spacing%3D%222%22%3ENEO-GEO%20MVS%3C/text%3E%0A%20%20%3Ctext%20x%3D%22284%22%20y%3D%2247%22%20text-anchor%3D%22end%22%20fill%3D%22%23ffcc00%22%20font-family%3D%22sans-serif%22%20font-weight%3D%22bold%22%20font-size%3D%2211%22%3EARCADE%3C/text%3E%0A%20%20%3Ccircle%20cx%3D%22150%22%20cy%3D%22180%22%20r%3D%2270%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.12%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.25%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22200%22%20text-anchor%3D%22middle%22%20font-size%3D%2262%22%3E%F0%9F%94%A5%3C/text%3E%0A%20%20%3Crect%20x%3D%2216%22%20y%3D%22285%22%20width%3D%22268%22%20height%3D%2285%22%20rx%3D%2210%22%20fill%3D%22rgba%280%2C0%2C0%2C0.7%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22316%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%20font-family%3D%22sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2216%22%20letter-spacing%3D%220.5%22%3E%E6%8B%B3%E7%9A%87%20%2797%3C/text%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22338%22%20text-anchor%3D%22middle%22%20fill%3D%22%23b0c4de%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20letter-spacing%3D%221%22%3ETHE%20KING%20OF%20FIGHTERS%20%2797%3C/text%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22358%22%20text-anchor%3D%22middle%22%20fill%3D%22%23f39c12%22%20font-family%3D%22monospace%22%20font-size%3D%2210%22%20font-weight%3D%22bold%22%3ENEO-GEO%20ARCADE%3C/text%3E%0A%3C/svg%3E",
     "rom": "assets/roms/kof97.zip",
     "bios": "assets/roms/neogeo.zip",
     "size": "28.5 MB",
-    "description": "格鬥遊戲歷史上的絕對神作！草薙京與八神庵的宿命對決、大蛇三神器篇終章。手感爽快、連段極致、出招順暢，是無數玩家童年街機廳不可磨滅的共同回憶。內建 Neo-Geo BIOS 與完整必殺技出招表！",
+    "description": "格鬥遊戲歷史上的絕對神作！草薙京與八神庵的宿命對決、大蛇三神器篇終章。點擊即可直接線上開打！內建完整必殺技出招表與流暢 60FPS 街機體驗。",
     "movelist": [
       {
         "character": "草薙京 (Kyo Kusanagi)",
@@ -1812,12 +1814,13 @@ kbd {
     ],
     "players": 2,
     "featured": false,
-    "preloaded": false,
+    "preloaded": true,
+    "embedUrl": "https://www.retrogames.cc/embed/10368-the-king-of-fighters-98-the-slugfest-king-of-fighters-98-dream-match-never-ends-ngm-2420.html",
     "cover": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20300%20400%22%20width%3D%22300%22%20height%3D%22400%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg_kof98%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%2310002b%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%237b2cbf%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22sfc_banner_kof98%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ff0055%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23ffcc00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2266%25%22%20stop-color%3D%22%2300f5d4%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23ff3b30%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22300%22%20height%3D%22400%22%20rx%3D%2216%22%20fill%3D%22url%28%23bg_kof98%29%22/%3E%0A%20%20%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22300%22%20height%3D%228%22%20rx%3D%224%22%20fill%3D%22url%28%23sfc_banner_kof98%29%22/%3E%0A%20%20%3Crect%20x%3D%220%22%20y%3D%2224%22%20width%3D%22300%22%20height%3D%2236%22%20fill%3D%22rgba%280%2C0%2C0%2C0.5%29%22/%3E%0A%20%20%3Ctext%20x%3D%2216%22%20y%3D%2247%22%20fill%3D%22%23f0f4f8%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2213%22%20letter-spacing%3D%222%22%3ENEO-GEO%20MVS%3C/text%3E%0A%20%20%3Ctext%20x%3D%22284%22%20y%3D%2247%22%20text-anchor%3D%22end%22%20fill%3D%22%23ffcc00%22%20font-family%3D%22sans-serif%22%20font-weight%3D%22bold%22%20font-size%3D%2211%22%3EARCADE%3C/text%3E%0A%20%20%3Ccircle%20cx%3D%22150%22%20cy%3D%22180%22%20r%3D%2270%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.12%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.25%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22200%22%20text-anchor%3D%22middle%22%20font-size%3D%2262%22%3E%E2%9A%A1%3C/text%3E%0A%20%20%3Crect%20x%3D%2216%22%20y%3D%22285%22%20width%3D%22268%22%20height%3D%2285%22%20rx%3D%2210%22%20fill%3D%22rgba%280%2C0%2C0%2C0.7%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22316%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%20font-family%3D%22sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2216%22%20letter-spacing%3D%220.5%22%3E%E6%8B%B3%E7%9A%87%20%2798%20%E5%A4%A2%E4%B9%8B%E5%B0%8D%E6%B1%BA%3C/text%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22338%22%20text-anchor%3D%22middle%22%20fill%3D%22%23b0c4de%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20letter-spacing%3D%221%22%3ETHE%20KING%20OF%20FIGHTERS%20%2798%3C/text%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22358%22%20text-anchor%3D%22middle%22%20fill%3D%22%23f39c12%22%20font-family%3D%22monospace%22%20font-size%3D%2210%22%20font-weight%3D%22bold%22%3EDREAM%20MATCH%201998%3C/text%3E%0A%3C/svg%3E",
     "rom": "assets/roms/kof98.zip",
     "bios": "assets/roms/neogeo.zip",
     "size": "40.2 MB",
-    "description": "歷代格鬥平衡度最高巔峰！匯聚大蛇篇全明星豪華陣容，移除劇情束縛的純粹格鬥殿堂。判定嚴謹、角色多樣、大門五郎與神樂千鶴爭霸天下，格鬥比賽標竿神作。",
+    "description": "歷代格鬥平衡度最高巔峰！匯聚大蛇篇全明星豪華陣容，移除劇情束縛的純粹格鬥殿堂。點擊即可直接在瀏覽器開戰！判定嚴謹、手感絕倫。",
     "movelist": [
       {
         "character": "八神庵 (Iori Yagami)",
@@ -1920,12 +1923,13 @@ kbd {
     ],
     "players": 2,
     "featured": false,
-    "preloaded": false,
+    "preloaded": true,
+    "embedUrl": "https://www.retrogames.cc/embed/10384-the-king-of-fighters-2002-ngm-2650-ngh-2650.html",
     "cover": "data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20300%20400%22%20width%3D%22300%22%20height%3D%22400%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg_kof2002%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%236a040f%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23ffb703%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22sfc_banner_kof2002%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ff0055%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2233%25%22%20stop-color%3D%22%23ffcc00%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2266%25%22%20stop-color%3D%22%2300f5d4%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23ff3b30%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22300%22%20height%3D%22400%22%20rx%3D%2216%22%20fill%3D%22url%28%23bg_kof2002%29%22/%3E%0A%20%20%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22300%22%20height%3D%228%22%20rx%3D%224%22%20fill%3D%22url%28%23sfc_banner_kof2002%29%22/%3E%0A%20%20%3Crect%20x%3D%220%22%20y%3D%2224%22%20width%3D%22300%22%20height%3D%2236%22%20fill%3D%22rgba%280%2C0%2C0%2C0.5%29%22/%3E%0A%20%20%3Ctext%20x%3D%2216%22%20y%3D%2247%22%20fill%3D%22%23f0f4f8%22%20font-family%3D%22monospace%22%20font-weight%3D%22bold%22%20font-size%3D%2213%22%20letter-spacing%3D%222%22%3ENEO-GEO%20MVS%3C/text%3E%0A%20%20%3Ctext%20x%3D%22284%22%20y%3D%2247%22%20text-anchor%3D%22end%22%20fill%3D%22%23ffcc00%22%20font-family%3D%22sans-serif%22%20font-weight%3D%22bold%22%20font-size%3D%2211%22%3EARCADE%3C/text%3E%0A%20%20%3Ccircle%20cx%3D%22150%22%20cy%3D%22180%22%20r%3D%2270%22%20fill%3D%22rgba%28255%2C255%2C255%2C0.12%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.25%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22200%22%20text-anchor%3D%22middle%22%20font-size%3D%2262%22%3E%F0%9F%A5%8A%3C/text%3E%0A%20%20%3Crect%20x%3D%2216%22%20y%3D%22285%22%20width%3D%22268%22%20height%3D%2285%22%20rx%3D%2210%22%20fill%3D%22rgba%280%2C0%2C0%2C0.7%29%22%20stroke%3D%22rgba%28255%2C255%2C255%2C0.18%29%22/%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22316%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffffff%22%20font-family%3D%22sans-serif%22%20font-weight%3D%22900%22%20font-size%3D%2216%22%20letter-spacing%3D%220.5%22%3E%E6%8B%B3%E7%9A%87%202002%20%E7%B5%82%E6%A5%B5%E7%8B%82%E7%86%B1%3C/text%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22338%22%20text-anchor%3D%22middle%22%20fill%3D%22%23b0c4de%22%20font-family%3D%22sans-serif%22%20font-size%3D%2211%22%20letter-spacing%3D%221%22%3ETHE%20KING%20OF%20FIGHTERS%202002%3C/text%3E%0A%20%20%3Ctext%20x%3D%22150%22%20y%3D%22358%22%20text-anchor%3D%22middle%22%20fill%3D%22%23f39c12%22%20font-family%3D%22monospace%22%20font-size%3D%2210%22%20font-weight%3D%22bold%22%3EUNLIMITED%20MATCH%3C/text%3E%0A%3C/svg%3E",
     "rom": "assets/roms/kof2002.zip",
     "bios": "assets/roms/neogeo.zip",
     "size": "80.5 MB",
-    "description": "回歸經典 3v3 制度與引入狂暴的 BC 爆氣取消系統（Super Cancel）！新增絕地反擊的 MAX2 隱藏超必殺技，節奏飛快、連擊華麗無雙。",
+    "description": "回歸經典 3v3 制度與引入狂暴的 BC 爆氣取消系統（Super Cancel）！新增絕地反擊的 MAX2 隱藏超必殺技，點擊即可秒開狂飆對打。",
     "movelist": [
       {
         "character": "K' (超越草薙之改造戰士)",
@@ -2298,16 +2302,24 @@ kbd {
         document.getElementById('main-view').style.display = 'none';
         document.getElementById('player-view').style.display = 'flex';
 
-        // Show/hide coin pill for arcade games
         const coinPill = document.getElementById('arcade-coin-pill');
         if (coinPill) {
-          coinPill.style.display = (game.system === 'arcade') ? 'inline-block' : 'none';
+          coinPill.style.display = (game.system === 'arcade' || game.embedUrl) ? 'inline-block' : 'none';
         }
 
         const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
         const virtualPad = document.getElementById('virtual-gamepad');
         if (virtualPad) {
-          virtualPad.style.display = isTouch ? 'flex' : 'none';
+          virtualPad.style.display = (isTouch && !game.embedUrl) ? 'flex' : 'none';
+        }
+
+        // If game has direct arcade embedUrl and no local dropped file override, load high-speed online arcade directly!
+        if (game.embedUrl && (!romSource || typeof romSource === 'string')) {
+          this.container.innerHTML = `<iframe src="${game.embedUrl}" style="width:100%;height:100%;border:none;background:#000;" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" allow="cross-origin-isolated; autoplay; gamepad"></iframe>`;
+          this.isRunning = true;
+          this.recordGameHistory(game);
+          this.showToast(`街機《${game.title}》已就緒，點擊畫面即可開打！`);
+          return;
         }
 
         let gameUrl = '';
@@ -2321,7 +2333,6 @@ kbd {
 
         this.container.innerHTML = '<div id="game-instance" style="width:100%;height:100%;"></div>';
 
-        // Select core: 'arcade' (FBNeo) for KOF/NeoGeo or 'snes' (Snes9x) for SNES
         const coreType = (game.system === 'arcade' || game.core === 'arcade') ? 'arcade' : 'snes';
 
         window.EJS_player = '#game-instance';
@@ -2335,7 +2346,6 @@ kbd {
         window.EJS_mouse = false;
         window.EJS_multitap = true;
 
-        // If arcade / Neo-Geo, feed the BIOS
         if (coreType === 'arcade') {
           window.EJS_biosUrl = game.bios || 'assets/roms/neogeo.zip';
         }
@@ -2382,9 +2392,7 @@ kbd {
       }
 
       restart() {
-        if (window.EJS_emulator && typeof window.EJS_emulator.restart === 'function') {
-          window.EJS_emulator.restart();
-        } else if (this.currentGame) {
+        if (this.currentGame) {
           this.launch(this.currentGame, this.currentGame.rom);
         }
       }
@@ -2400,11 +2408,7 @@ kbd {
       }
 
       triggerFastForward(enable = true) {
-        if (window.EJS_emulator && typeof window.EJS_emulator.setSpeed === 'function') {
-          window.EJS_emulator.setSpeed(enable ? 2.5 : 1.0);
-        } else {
-          this.simulateKey(32, 'Space', enable ? 'keydown' : 'keyup');
-        }
+        this.simulateKey(32, 'Space', enable ? 'keydown' : 'keyup');
       }
 
       triggerRewind(enable = true) {
@@ -2654,13 +2658,13 @@ kbd {
 
         games.forEach(game => {
           const isKof = game.category && game.category.includes('kof');
-          const isPreloaded = game.preloaded;
+          const isPreloaded = game.preloaded || game.embedUrl;
 
           let badgeClass = '';
           let badgeText = game.language;
           if (isKof) {
             badgeClass = 'badge-arcade';
-            badgeText = '🥊 街機原版';
+            badgeText = '🔥 點擊直玩';
           } else if (isPreloaded) {
             badgeClass = 'badge-gold';
             badgeText = '⚡ 免下載即玩';
@@ -2723,7 +2727,7 @@ kbd {
           
           const tabNames = {
             'all': '超任與拳皇街機經典庫',
-            'kof': '🥊 拳皇 (The King of Fighters) 街機專區',
+            'kof': '🥊 拳皇 (The King of Fighters) 街機專區 (點擊秒開)',
             'homebrew': '預載即玩神作 (免下載)',
             'action': '動作 / 平台冒險',
             'rpg': '角色扮演 (RPG) 殿堂',
@@ -2760,32 +2764,23 @@ kbd {
 
       async function launchGame(game, localFile = null) {
         selectedGame = game;
+        
+        // Priority 1: If user dropped a local file, always launch it
         if (localFile) {
           window.snesEmulator.launch(game, localFile);
           return;
         }
 
-        // If game is local file or needs verification
-        if (!game.preloaded) {
-          // Preflight check if ROM is deployed on the server
-          let romExists = false;
-          try {
-            const check = await fetch(game.rom, { method: 'HEAD' });
-            if (check.ok) romExists = true;
-          } catch (e) {}
-
-          if (!romExists) {
-            const isKof = game.category && game.category.includes('kof');
-            const fileHint = isKof ? `${game.rom.split('/').pop()} (Neo-Geo 街機 ZIP 檔)` : '.sfc / .smc 檔案';
-            if (confirm(`【${game.title} - 自備 ROM 即插即玩】\n\n系統已為您完全配好 Neo-Geo/超任雙架構引擎與 BIOS！\n\n請點選「確定」選取您的 ${fileHint} 即可立即秒開遊玩！\n（您也可以在上方點選「⚡ 免下載即玩」標籤，直接免自備秒開 4 款遊戲！）`)) {
-              romFileInput.click();
-            }
-            return;
-          }
+        // Priority 2: Direct Play (KOF arcade embed or preloaded homebrews)
+        if (game.embedUrl || game.preloaded) {
+          window.snesEmulator.launch(game, game.rom);
+          return;
         }
 
-        window.snesEmulator.showToast(`正在連線啟動：${game.title}...`);
-        window.snesEmulator.launch(game, game.rom);
+        // Fallback for copyright games without direct stream
+        if (confirm(`【${game.title} - 自備 ROM 即插即玩】\n\n本款為任天堂/原廠版權作品，系統已備好專屬卡帶插槽！\n\n請點選「確定」選取您的檔案即刻開玩！\n（若想直接秒開遊玩，請點選頂部「🥊 拳皇街機」或「⚡ 免下載即玩」，點擊即可直接開打！）`)) {
+          romFileInput.click();
+        }
       }
 
       function openGameModal(game) {
@@ -2796,18 +2791,17 @@ kbd {
         modalYear.textContent = `${game.year} 年`;
         modalPlayers.textContent = `${game.players} 人`;
         modalRegion.textContent = game.region;
-        modalSize.textContent = game.size;
+        modalSize.textContent = (game.embedUrl || game.preloaded) ? '一鍵秒開' : game.size;
 
         const isKof = game.category && game.category.includes('kof');
 
         modalTags.innerHTML = `
           <span class="badge-tag ${isKof ? 'badge-arcade' : (game.preloaded ? 'badge-gold' : '')}">
-            ${isKof ? 'Neo-Geo 街機原版' : (game.preloaded ? '免下載即玩' : game.language)}
+            ${isKof ? '🔥 點擊直玩 (免下載)' : (game.preloaded ? '⚡ 免下載即玩' : game.language)}
           </span>
           <span class="badge-tag">${game.genre}</span>
         `;
 
-        // Render Character Move Lists if available
         if (game.movelist && game.movelist.length > 0) {
           modalMovelistContainer.style.display = 'block';
           renderMovelist(game.movelist);
@@ -2821,11 +2815,7 @@ kbd {
         };
 
         modalDownloadRom.onclick = () => {
-          if (game.preloaded) {
-            window.open(game.rom, '_blank');
-          } else {
-            alert('本款為街機/原廠作品，請點選「載入 ROM」或拖入您的 ROM 壓縮檔即可暢玩！');
-          }
+          romFileInput.click();
         };
 
         gameModal.style.display = 'flex';
