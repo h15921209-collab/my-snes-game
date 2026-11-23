@@ -1,0 +1,22 @@
+{
+  "name": "super-cloud-snes",
+  "version": "1.0.0",
+  "description": "跨平台、零安裝、極速 60FPS 的超級任天堂（SNES / SFC）雲端模擬器",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 8080 .",
+    "dev": "npx serve -l 8080 .",
+    "test-server": "python -m http.server 8080"
+  },
+  "keywords": [
+    "snes",
+    "emulator",
+    "snes9x",
+    "wasm",
+    "webassembly",
+    "retrogaming",
+    "pwa"
+  ],
+  "author": "Super Cloud Station",
+  "license": "MIT"
+}

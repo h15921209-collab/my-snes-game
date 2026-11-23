@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Super Cloud SNES | 超任雲端極速模擬器</title>
+  <meta name="description" content="零安裝、跨平台、極速 60FPS 的超級任天堂（SNES / SFC）雲端模擬器。內建經典遊戲庫、Switch 質感介面、手把支援與雲端存檔。">
+  <!-- PWA & Theme -->
+  <meta name="theme-color" content="#0f1117">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%231e212b'/><circle cx='40' cy='38' r='10' fill='%2300b4d8'/><circle cx='60' cy='38' r='10' fill='%23ffbe0b'/><circle cx='40' cy='62' r='10' fill='%2306d6a0'/><circle cx='60' cy='62' r='10' fill='%23ef476f'/></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- FontAwesome for crisp icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="theme-dark">
+  <!-- Scanline CRT Effect Toggle Overlay -->
+  <div id="crt-overlay" class="crt-overlay"></div>
+
+  <!-- App Wrapper -->
+  <div id="app" class="app-container">
+    <!-- Header Navigation -->
+    <header class="app-header">
+      <div class="header-left">
+        <div class="brand-logo" id="btn-home">
+          <div class="sfc-diamonds">
+            <span class="diamond d-blue"></span>
+            <span class="diamond d-yellow"></span>
+            <span class="diamond d-green"></span>
+            <span class="diamond d-red"></span>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">SUPER CLOUD</span>
+            <span class="brand-sub">SNES STATION</span>
+          </div>
+        </div>
+        <div class="header-status">
+          <span class="status-pill status-ready" title="WebAssembly 模擬核心就緒">
+            <i class="fa-solid fa-microchip"></i> WASM Snes9x
+          </span>
+          <span class="status-pill status-gamepad" id="gamepad-status" title="實體手把連線狀態">
+            <i class="fa-solid fa-gamepad"></i> <span id="gamepad-text">手把已待命</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="header-center">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="search-input" placeholder="搜尋遊戲名稱、系列、類型 (如 瑪利歐, RPG, 繁中)..." autocomplete="off">
+          <button id="search-clear" class="search-clear-btn" style="display:none;"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="btn-upload-rom" class="nav-btn primary-gradient" title="載入自己的 ROM 檔案">
+          <i class="fa-solid fa-file-arrow-up"></i>
+          <span>載入 ROM</span>
+        </button>
+        <button id="btn-saves-manager" class="nav-btn" title="本機與雲端存檔管理">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>存檔管理</span>
+        </button>
+        <button id="btn-keybindings" class="nav-btn" title="鍵盤與手把按鍵設定">
+          <i class="fa-solid fa-keyboard"></i>
+        </button>
+        <button id="btn-crt-toggle" class="nav-btn icon-only" title="切換 CRT 復古掃描線濾鏡">
+          <i class="fa-solid fa-tv"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="main-view">
+      <!-- Hero Spotlight Banner -->
+      <section class="hero-spotlight" id="hero-banner">
+        <div class="hero-backdrop" id="hero-bg"></div>
+        <div class="hero-gradient"></div>
+        <div class="hero-content">
+          <div class="hero-badges">
+            <span class="badge-tag badge-gold"><i class="fa-solid fa-crown"></i> 經典殿堂推薦</span>
+            <span class="badge-tag badge-cyan" id="hero-lang">繁體中文版</span>
+            <span class="badge-tag" id="hero-genre">RPG 角色扮演</span>
+          </div>
+          <h1 class="hero-title" id="hero-title">超時空之鑰 (Chrono Trigger)</h1>
+          <p class="hero-desc" id="hero-desc">
+            由坂口博信、堀井雄二、鳥山明三大神級巨匠聯手打造的空前絕後巔峰之作。跨越史前、中世、現代、未來與末世的時空穿梭，擁有令人動容的配樂與十多種精彩結局。
+          </p>
+          <div class="hero-actions">
+            <button class="play-btn hero-play-btn" id="hero-play-action">
+              <i class="fa-solid fa-play"></i> 立即啟動遊戲
+            </button>
+            <button class="details-btn" id="hero-details-action">
+              <i class="fa-solid fa-circle-info"></i> 查看詳情
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Category Filter Tabs (Switch Style) -->
+      <section class="category-filters">
+        <button class="filter-tab active" data-category="all">
+          <i class="fa-solid fa-layer-group"></i> 全部遊戲 (<span id="count-all">0</span>)
+        </button>
+        <button class="filter-tab" data-category="chinese">
+          <i class="fa-solid fa-language"></i> 中文漢化神作
+        </button>
+        <button class="filter-tab" data-category="action">
+          <i class="fa-solid fa-running"></i> 動作 / 冒險
+        </button>
+        <button class="filter-tab" data-category="rpg">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> 角色扮演 (RPG)
+        </button>
+        <button class="filter-tab" data-category="multiplayer">
+          <i class="fa-solid fa-users"></i> 雙人 / 對戰
+        </button>
+        <button class="filter-tab" data-category="homebrew">
+          <i class="fa-solid fa-flask"></i> 獨立新作 / 測試
+        </button>
+      </section>
+
+      <!-- Game Cards Grid -->
+      <section class="games-section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fa-solid fa-gamepad"></i>
+            <span id="gallery-title">超任精選經典庫</span>
+          </h2>
+          <span class="section-subtitle">點擊封面立即開玩 · 支援手把連線 · 隨時即時存檔</span>
+        </div>
+
+        <div class="games-grid" id="games-grid">
+          <!-- Game cards will be dynamically injected here -->
+        </div>
+
+        <!-- Empty state when searching -->
+        <div id="empty-state" class="empty-state" style="display: none;">
+          <i class="fa-solid fa-ghost empty-icon"></i>
+          <h3>找不到相符的遊戲</h3>
+          <p>找不到「<span id="empty-query"></span>」，您可以點選右上角「載入 ROM」直接載入本機自備遊戲！</p>
+          <button class="btn-clear-search" id="btn-empty-clear">清除搜尋條件</button>
+        </div>
+      </section>
+
+      <!-- Drag & Drop Zone Container -->
+      <section class="drop-zone-section" id="drop-zone">
+        <div class="drop-card">
+          <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+          <div class="drop-text">
+            <h3>拖曳任意 SNES 遊戲檔案至此即刻開玩</h3>
+            <p>支援 <code>.sfc</code>、<code>.smc</code>、<code>.zip</code> 格式，或點擊瀏覽選取</p>
+          </div>
+          <input type="file" id="rom-file-input" accept=".sfc,.smc,.zip" style="display: none;">
+          <button class="btn-browse-file" id="btn-browse-rom">選取本機檔案</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Player Screen View (Hidden by default, shown when game is active) -->
+    <div id="player-view" class="player-container" style="display: none;">
+      <!-- Top Floating Control Bar -->
+      <div class="player-topbar">
+        <div class="player-left">
+          <button class="player-btn btn-exit" id="btn-player-exit" title="返回遊戲選單 (自動保存)">
+            <i class="fa-solid fa-chevron-left"></i> <span>選單</span>
+          </button>
+          <div class="player-game-info">
+            <span class="player-game-title" id="current-game-title">超級瑪利歐世界</span>
+            <span class="player-fps" id="player-fps-pill">60 FPS</span>
+          </div>
+        </div>
+
+        <div class="player-actions">
+          <button class="player-btn" id="btn-quick-save" title="快速存檔 (F2)">
+            <i class="fa-solid fa-floppy-disk"></i> <span>存檔</span>
+          </button>
+          <button class="player-btn" id="btn-quick-load" title="快速讀檔 (F4)">
+            <i class="fa-solid fa-folder-open"></i> <span>讀檔</span>
+          </button>
+          <button class="player-btn" id="btn-rewind" title="長按倒帶 (Backspace)">
+            <i class="fa-solid fa-backward"></i> <span>倒帶</span>
+          </button>
+          <button class="player-btn" id="btn-fastforward" title="長按 2x 倍速 (Space)">
+            <i class="fa-solid fa-forward"></i> <span>加速</span>
+          </button>
+          <button class="player-btn" id="btn-restart" title="重新啟動卡帶 (Reset)">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+          <button class="player-btn" id="btn-mute" title="靜音 / 開啟音效">
+            <i class="fa-solid fa-volume-high"></i>
+          </button>
+          <button class="player-btn" id="btn-fullscreen" title="切換全螢幕 (F11)">
+            <i class="fa-solid fa-expand"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Emulator Viewport Core Area -->
+      <div class="emulator-viewport" id="emulator-viewport">
+        <div id="emulator-container">
+          <!-- EmulatorJS will inject canvas here -->
+        </div>
+      </div>
+
+      <!-- Virtual Mobile Gamepad Overlay (Auto activates on touch devices) -->
+      <div id="virtual-gamepad" class="virtual-gamepad" style="display: none;">
+        <!-- D-Pad Left -->
+        <div class="touch-dpad">
+          <button class="vbtn dpad-up" data-key="up"><i class="fa-solid fa-caret-up"></i></button>
+          <button class="vbtn dpad-left" data-key="left"><i class="fa-solid fa-caret-left"></i></button>
+          <div class="dpad-center"></div>
+          <button class="vbtn dpad-right" data-key="right"><i class="fa-solid fa-caret-right"></i></button>
+          <button class="vbtn dpad-down" data-key="down"><i class="fa-solid fa-caret-down"></i></button>
+        </div>
+
+        <!-- Center Controls: Select & Start -->
+        <div class="touch-center">
+          <div class="touch-pill-group">
+            <button class="vbtn vbtn-pill" data-key="select">SELECT</button>
+            <button class="vbtn vbtn-pill" data-key="start">START</button>
+          </div>
+        </div>
+
+        <!-- Action Diamond Right: X, Y, A, B -->
+        <div class="touch-actions">
+          <button class="vbtn abxy-btn btn-x" data-key="x">X</button>
+          <button class="vbtn abxy-btn btn-y" data-key="y">Y</button>
+          <button class="vbtn abxy-btn btn-b" data-key="b">B</button>
+          <button class="vbtn abxy-btn btn-a" data-key="a">A</button>
+        </div>
+
+        <!-- Top Shoulders: L & R -->
+        <div class="touch-shoulders">
+          <button class="vbtn shoulder-btn shoulder-l" data-key="l">L</button>
+          <button class="vbtn shoulder-btn shoulder-r" data-key="r">R</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Detail Modal -->
+    <div id="game-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card">
+        <button class="modal-close" id="btn-modal-close"><i class="fa-solid fa-xmark"></i></button>
+        <div class="modal-header">
+          <img id="modal-cover" src="" alt="封面" class="modal-cover-img">
+          <div class="modal-meta">
+            <div class="modal-tags" id="modal-tags"></div>
+            <h2 id="modal-title" class="modal-title">遊戲名稱</h2>
+            <div class="modal-info-row">
+              <span><i class="fa-regular fa-calendar"></i> <span id="modal-year">1995</span></span>
+              <span><i class="fa-solid fa-users"></i> <span id="modal-players">1 人</span></span>
+              <span><i class="fa-solid fa-globe"></i> <span id="modal-region">台灣/日本</span></span>
+              <span><i class="fa-solid fa-floppy-disk"></i> <span id="modal-size">4.0 MB</span></span>
+            </div>
+            <p id="modal-desc" class="modal-desc">遊戲描述內容...</p>
+            <div class="modal-actions">
+              <button class="play-btn modal-play-btn" id="modal-play-btn">
+                <i class="fa-solid fa-play"></i> 立即遊玩
+              </button>
+              <button class="btn-subtle" id="modal-download-rom">
+                <i class="fa-solid fa-download"></i> 下載 ROM
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Saves Manager Modal -->
+    <div id="saves-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card saves-card">
+        <button class="modal-close" id="btn-saves-close"><i class="fa-solid fa-xmark"></i></button>
+        <h2><i class="fa-solid fa-floppy-disk"></i> 雲端與本機存檔管理器</h2>
+        <p class="modal-subtext">所有遊戲的卡帶電池記憶（SRAM）與即時存檔皆會自動保存在瀏覽器 IndexedDB 中。</p>
+        
+        <div class="saves-toolbar">
+          <button class="btn-subtle" id="btn-export-all-saves"><i class="fa-solid fa-file-export"></i> 匯出全部存檔 (備份)</button>
+          <label class="btn-subtle" for="import-save-file" style="cursor: pointer;"><i class="fa-solid fa-file-import"></i> 匯入存檔備份</label>
+          <input type="file" id="import-save-file" accept=".json,.srm" style="display: none;">
+          <button class="btn-danger" id="btn-clear-all-saves"><i class="fa-solid fa-trash-can"></i> 清除本機快取存檔</button>
+        </div>
+
+        <div class="saves-list" id="saves-list-container">
+          <div class="empty-saves-tip">目前尚無存檔記錄，開啟任何遊戲遊玩時將自動建立！</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Keybindings Modal -->
+    <div id="keybindings-modal" class="modal-backdrop" style="display: none;">
+      <div class="modal-card keybindings-card">
+        <button class="modal-close" id="btn-keybindings-close"><i class="fa-solid fa-xmark"></i></button>
+        <h2><i class="fa-solid fa-gamepad"></i> 操作指南與按鍵對應</h2>
+        
+        <div class="key-tables-grid">
+          <div class="key-col">
+            <h3><i class="fa-solid fa-keyboard"></i> 鍵盤 1P 預設對應</h3>
+            <table class="key-table">
+              <tr><th>超任按鍵</th><th>鍵盤鍵位</th></tr>
+              <tr><td>方向鍵 (D-Pad)</td><td><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd></td></tr>
+              <tr><td>B 鍵 (跳躍/確定)</td><td><kbd>Z</kbd></td></tr>
+              <tr><td>A 鍵 (攻擊/確定)</td><td><kbd>X</kbd></td></tr>
+              <tr><td>Y 鍵 (奔跑/蓄力)</td><td><kbd>A</kbd></td></tr>
+              <tr><td>X 鍵 (特殊動作)</td><td><kbd>S</kbd></td></tr>
+              <tr><td>L 肩鍵</td><td><kbd>Q</kbd></td></tr>
+              <tr><td>R 肩鍵</td><td><kbd>W</kbd></td></tr>
+              <tr><td>SELECT</td><td><kbd>Shift</kbd></td></tr>
+              <tr><td>START</td><td><kbd>Enter</kbd></td></tr>
+            </table>
+          </div>
+
+          <div class="key-col">
+            <h3><i class="fa-solid fa-gamepad"></i> 實體手把 (隨插即用)</h3>
+            <p class="gamepad-hint">
+              支援 <strong>PS5 / PS4、Xbox Series/One、Nintendo Switch Pro、8BitDo</strong> 等所有藍牙或 USB 手把，連接後立即可直接遊玩，按鍵自動完全對齊實體鍵位。
+            </p>
+            <div class="shortcut-box">
+              <h4>快捷功能鍵</h4>
+              <ul>
+                <li><kbd>F2</kbd>：快速儲存即時進度</li>
+                <li><kbd>F4</kbd>：快速載入進度</li>
+                <li><kbd>Backspace</kbd>：倒帶（Rewind）</li>
+                <li><kbd>Space</kbd>：2x 快速前進</li>
+                <li><kbd>F11</kbd>：全螢幕切換</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/emulator.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

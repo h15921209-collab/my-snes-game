@@ -1,0 +1,13 @@
+name = "snes-cloud-emulator"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = "."
+
+[build]
+command = ""
+
+[[headers]]
+for = "/*"
+[headers.values]
+"Cross-Origin-Opener-Policy" = "same-origin"
+"Cross-Origin-Embedder-Policy" = "credentialless"
+"Access-Control-Allow-Origin" = "*"
